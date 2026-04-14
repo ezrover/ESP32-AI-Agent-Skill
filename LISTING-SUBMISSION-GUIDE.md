@@ -15,22 +15,58 @@
 | 5 | [ComposioHQ/awesome-claude-skills](https://github.com/ComposioHQ/awesome-claude-skills) | 500+ | Bulleted list `[Name](url) - desc` | Skills |
 | 6 | [jqueryscript/awesome-claude-code](https://github.com/jqueryscript/awesome-claude-code) | 1k+ | Badge + link + star count | Plugins |
 | 7 | [alirezarezvani/claude-skills](https://github.com/alirezarezvani/claude-skills) | 500+ | Domain table | Engineering skills |
-| 8 | [anthropics/claude-plugins-official](https://github.com/anthropics/claude-plugins-official) | Official | Form submission | Official registry |
+| 8 | Official Anthropic Plugin Directory | Official | 3-step web form | Official registry |
 
 ---
 
-## 0. Official Anthropic Plugin Registry
+## Submission Status
 
-**Submission URL:** https://clau.de/plugin-directory-submission
+| # | Repository | Status | PR/Link |
+|---|-----------|--------|---------|
+| 0 | Official Anthropic Plugin Directory | ✅ Submitted | via claude.ai/settings/plugins/submit |
+| 1 | rohitg00/awesome-claude-code-toolkit | ✅ PR created | Branch: `add-esp32-ai-agent-skill` |
+| 2 | hesreallyhim/awesome-claude-code | ⚠️ Branch pushed | PR requires manual creation via web UI (repo restricts `CreatePullRequest` API) |
+| 3 | ComposioHQ/awesome-claude-plugins | ✅ PR created | Branch: `add-esp32-plugin` |
+| 4 | travisvn/awesome-claude-skills | ✅ PR created | Branch: `add-esp32-skill` |
+| 5 | ComposioHQ/awesome-claude-skills | ✅ PR created | Branch: `add-esp32-skill` (fork name: `awesome-claude-skills-composio`) |
+| 6 | jqueryscript/awesome-claude-code | ✅ PR created | Branch: `add-esp32-plugin` |
+| 7 | alirezarezvani/claude-skills | ⏳ Not submitted | Best as an issue, not a PR (repo bundles skills into its own folder structure) |
 
-This is the official Anthropic-managed directory. Submit via the form (not a PR). Key info to provide:
+---
 
-- **Plugin Name:** ESP32
-- **GitHub URL:** https://github.com/ezrover/ESP32-AI-Agent-Skill
-- **Description:** Expert ESP32 embedded systems guidance — chip selection across 9 variants, GPIO validation with anti-bricking safety checks, code generation for Arduino and ESP-IDF, LVGL UI references (v8.2–v9.5), and 60+ Waveshare board pinouts.
-- **Author:** ezrover
-- **License:** MIT
-- **Install command:** `claude /install-plugin https://github.com/ezrover/ESP32-AI-Agent-Skill`
+## 0. Official Anthropic Plugin Directory
+
+**Submission URL:** https://claude.ai/settings/plugins/submit
+
+> **Note:** The old URL `https://clau.de/plugin-directory-submission` redirects here. The actual form is at `claude.ai/settings/plugins/submit` and requires being logged in to your Claude account.
+
+This is a **3-step web form** (not a GitHub PR):
+
+### Step 1: Introduction
+- Read the terms: submissions are reviewed, not guaranteed inclusion
+- Check the consent checkbox authorizing Anthropic to contact you and process info per their Privacy Policy and Software Directory Terms
+- Click "Next"
+
+### Step 2: Plugin information
+- **Link to plugin** (required): `https://github.com/ezrover/ESP32-AI-Agent-Skill`
+- **Plugin homepage**: `https://github.com/ezrover/ESP32-AI-Agent-Skill` (can be same as repo if no separate docs site)
+- **Plugin name** (required): `ESP32-AI-Agent-Skill`
+- **Plugin description** (required): Expert ESP32 embedded systems plugin for Claude Code and Cowork. Provides chip selection guidance across 9 ESP32 variants (ESP32, S2, S3, C3, C6, H2, C5, P4, C61), GPIO pin validation with anti-bricking safety checks (strapping pins, flash-connected pins, ADC2/WiFi conflicts), Arduino and ESP-IDF code generation, LVGL v8.2-v9.5 UI reference docs, and 60+ Waveshare board pinouts. Includes 50 automated tests. The first hardware/embedded Claude Code plugin.
+- **Example use cases** (required): Provide 3-5 concrete examples showing user prompts and what the plugin does. Format: `Example 1: "prompt" — what happens`
+
+### Step 3: Submission details
+- **Supported platforms** (required, check at least one): Claude Code, Claude Cowork
+- **License type**: `MIT`
+- **Privacy policy URL**: (optional)
+- **Submitter email**: Pre-filled from your Claude account
+- Click "Submit for review"
+
+### Learnings
+- The form auto-fills your email from your logged-in Claude account
+- "Plugin name" should match your repo name — they warn against using brand names you don't own
+- The "Supported platforms" checkboxes are finicky with programmatic form filling; clicking directly works better
+- There is no GitHub repo for the official registry (the old `anthropics/claude-plugins-official` reference was incorrect)
+- After submission you can view status at claude.ai/settings/plugins/submissions
 
 ---
 
@@ -353,3 +389,45 @@ echo "2. Open issue on alirezarezvani/claude-skills for inclusion"
 5. **PR body:** 3-5 bullet points about what makes it unique
 6. **Unique angle:** Emphasize this is the **first hardware/embedded systems plugin** — most listings are 100% software-focused
 7. **Include install command** where the format allows it
+
+---
+
+## Practical Learnings from Actual Submissions (April 2026)
+
+### Fork naming conflicts
+When forking two repos with the same name (e.g., `travisvn/awesome-claude-skills` and `ComposioHQ/awesome-claude-skills`), GitHub won't allow two forks named `awesome-claude-skills`. Use the `--fork-name` flag:
+```bash
+gh repo fork ComposioHQ/awesome-claude-skills --clone --fork-name awesome-claude-skills-composio
+```
+
+### Some repos restrict PR creation via API
+`hesreallyhim/awesome-claude-code` returned `"ezrover does not have the correct permissions to execute CreatePullRequest"` when using `gh pr create`. The branch was pushed successfully, but the PR must be created manually via the GitHub web UI at `https://github.com/hesreallyhim/awesome-claude-code/compare/main...ezrover:add-esp32-ai-agent-skill`.
+
+### Entry placement matters
+Each repo has different formatting. Read the existing entries carefully:
+- **rohitg00/awesome-claude-code-toolkit**: Markdown table with `| [Name](url) | | Description |`
+- **hesreallyhim/awesome-claude-code**: Bulleted list with `- [Name](url) by [Author](url) - Description` (50+ word descriptions are common)
+- **ComposioHQ/awesome-claude-plugins**: Bulleted list under category headers `- [Name](url) - Description`
+- **travisvn/awesome-claude-skills**: Table with `| **[Name](url)** | Description |` (bold name)
+- **ComposioHQ/awesome-claude-skills**: Bulleted list `- [Name](url) - Description. *By [@author](url)*`
+- **jqueryscript/awesome-claude-code**: Bulleted list `- [**Name**](url): Description` (bold name, colon separator)
+
+### The `gh` CLI workflow
+The fastest reliable workflow for each repo:
+```bash
+gh repo fork OWNER/REPO --clone --default-branch-only
+cd REPO
+git checkout -b add-esp32-ai-agent-skill
+# Edit README.md
+git add README.md
+git commit -m "Add ESP32-AI-Agent-Skill: embedded systems plugin"
+git push origin add-esp32-ai-agent-skill
+gh pr create --title "Add ESP32-AI-Agent-Skill" --body "..."
+```
+
+### Official Anthropic registry
+- The form is at `claude.ai/settings/plugins/submit`, not a GitHub repo
+- It's a React app — programmatic `form_input` may not trigger state updates; direct clicks on checkboxes work more reliably
+- Your email is auto-populated from your Claude account
+- After submission, check status at `claude.ai/settings/plugins/submissions`
+- Submitting does not guarantee inclusion; Anthropic reviews all submissions
