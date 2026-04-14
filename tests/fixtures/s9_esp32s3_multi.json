@@ -1,0 +1,18 @@
+{
+  "platform": "esp32s3",
+  "variant": "esp32s3",
+  "module": "WROOM",
+  "wifi_enabled": false,
+  "pins": [
+    {"gpio": 11, "function": "SPI_MOSI", "protocol_bus": "spi", "device": "SX1276", "direction": "output", "pull": "none", "speed_hz": 10000000, "notes": ""},
+    {"gpio": 12, "function": "SPI_MISO", "protocol_bus": "spi", "device": "SX1276", "direction": "input", "pull": "none", "speed_hz": 10000000, "notes": ""},
+    {"gpio": 13, "function": "SPI_SCLK", "protocol_bus": "spi", "device": "SX1276", "direction": "output", "pull": "none", "speed_hz": 10000000, "notes": ""},
+    {"gpio": 10, "function": "SPI_CS", "protocol_bus": "spi", "device": "SX1276", "direction": "output", "pull": "none", "speed_hz": 10000000, "notes": ""},
+    {"gpio": 14, "function": "OUTPUT", "protocol_bus": "gpio", "device": "SX1276", "direction": "output", "pull": "none", "speed_hz": 0, "notes": "RST pin"},
+    {"gpio": 9, "function": "INPUT", "protocol_bus": "gpio", "device": "SX1276", "direction": "input", "pull": "up", "speed_hz": 0, "notes": "DIO0 interrupt"},
+    {"gpio": 17, "function": "SDA", "protocol_bus": "i2c", "device": "SSD1306", "direction": "inout", "pull": "up", "speed_hz": 400000, "notes": ""},
+    {"gpio": 18, "function": "SCL", "protocol_bus": "i2c", "device": "SSD1306", "direction": "inout", "pull": "up", "speed_hz": 400000, "notes": ""},
+    {"gpio": 15, "function": "UART_TX", "protocol_bus": "uart", "device": "NEO6M", "direction": "output", "pull": "none", "speed_hz": 9600, "notes": ""},
+    {"gpio": 16, "function": "UART_RX", "protocol_bus": "uart", "device": "NEO6M", "direction": "input", "pull": "none", "speed_hz": 9600, "notes": ""}
+  ]
+}

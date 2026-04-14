@@ -1,0 +1,9 @@
+{
+  "platform": "esp32s3",
+  "variant": "esp32s3",
+  "module": "WROOM",
+  "wifi_enabled": false,
+  "pins": [
+    {"gpio": 6, "function": "OUTPUT", "protocol_bus": "gpio", "device": "Test", "direction": "output", "pull": "none", "speed_hz": 0, "notes": "NOT a flash pin on S3 - should be accepted"}
+  ]
+}

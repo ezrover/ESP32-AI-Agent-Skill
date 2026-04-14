@@ -1,0 +1,9 @@
+{
+  "platform": "esp32",
+  "variant": "esp32",
+  "module": "WROOM",
+  "wifi_enabled": false,
+  "pins": [
+    {"gpio": 21, "function": "OUTPUT", "protocol_bus": "gpio", "device": "LED", "direction": "output", "pull": "none", "speed_hz": 0, "notes": ""}
+  ]
+}

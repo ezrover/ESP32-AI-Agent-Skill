@@ -1,0 +1,9 @@
+{
+  "platform": "esp32",
+  "variant": "esp32",
+  "module": "WROOM",
+  "wifi_enabled": true,
+  "pins": [
+    {"gpio": 25, "function": "ANALOG_IN", "protocol_bus": "gpio", "device": "Soil_Sensor", "direction": "input", "pull": "none", "speed_hz": 0, "notes": "ADC2_CH8 - conflicts with WiFi"}
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "platform": "esp32",
+  "variant": "esp32",
+  "module": "WROOM",
+  "wifi_enabled": false,
+  "pins": [
+    {"gpio": 6, "function": "OUTPUT", "protocol_bus": "gpio", "device": "Test", "direction": "output", "pull": "none", "speed_hz": 0, "notes": "Flash pin - should be rejected"}
+  ]
+}

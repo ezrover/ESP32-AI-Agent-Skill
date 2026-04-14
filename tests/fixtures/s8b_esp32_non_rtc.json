@@ -1,0 +1,9 @@
+{
+  "platform": "esp32",
+  "variant": "esp32",
+  "module": "WROOM",
+  "wifi_enabled": false,
+  "pins": [
+    {"gpio": 20, "function": "INPUT", "protocol_bus": "gpio", "device": "Wake_Button", "direction": "input", "pull": "up", "speed_hz": 0, "notes": "Non-RTC GPIO"}
+  ]
+}

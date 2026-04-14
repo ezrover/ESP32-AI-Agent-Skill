@@ -1,0 +1,9 @@
+{
+  "name": "ESP32",
+  "description": "Expert ESP32 embedded systems guidance — chip selection, GPIO validation, code generation (Arduino/ESP-IDF), LVGL UI, and Waveshare board references. Prevents hardware damage through safety validations.",
+  "version": "1.0.0",
+  "author": {
+    "name": "ezrover",
+    "url": "https://github.com/ezrover"
+  }
+}

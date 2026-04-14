@@ -1,0 +1,10 @@
+{
+  "platform": "esp32",
+  "variant": "esp32",
+  "module": "WROOM",
+  "wifi_enabled": false,
+  "pins": [
+    {"gpio": 0, "function": "INPUT", "protocol_bus": "gpio", "device": "Button_1", "direction": "input", "pull": "up", "speed_hz": 0, "notes": "BOOT button - strapping pin"},
+    {"gpio": 12, "function": "INPUT", "protocol_bus": "gpio", "device": "Button_2", "direction": "input", "pull": "up", "speed_hz": 0, "notes": "MTDI - strapping pin, flash voltage risk"}
+  ]
+}

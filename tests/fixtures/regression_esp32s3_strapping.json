@@ -1,0 +1,11 @@
+{
+  "platform": "esp32s3",
+  "variant": "esp32s3",
+  "module": "WROOM",
+  "wifi_enabled": false,
+  "pins": [
+    {"gpio": 0, "function": "INPUT", "protocol_bus": "gpio", "device": "Button_Boot", "direction": "input", "pull": "up", "speed_hz": 0, "notes": ""},
+    {"gpio": 3, "function": "INPUT", "protocol_bus": "gpio", "device": "Button_JTAG", "direction": "input", "pull": "up", "speed_hz": 0, "notes": ""},
+    {"gpio": 46, "function": "INPUT", "protocol_bus": "gpio", "device": "Button_ROM", "direction": "input", "pull": "up", "speed_hz": 0, "notes": ""}
+  ]
+}

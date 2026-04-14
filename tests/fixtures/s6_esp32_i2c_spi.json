@@ -1,0 +1,17 @@
+{
+  "platform": "esp32",
+  "variant": "esp32",
+  "module": "WROOM",
+  "wifi_enabled": false,
+  "pins": [
+    {"gpio": 21, "function": "SDA", "protocol_bus": "i2c", "device": "BME280", "direction": "inout", "pull": "up", "speed_hz": 400000, "notes": ""},
+    {"gpio": 22, "function": "SCL", "protocol_bus": "i2c", "device": "BME280", "direction": "inout", "pull": "up", "speed_hz": 400000, "notes": ""},
+    {"gpio": 23, "function": "SPI_MOSI", "protocol_bus": "spi", "device": "ST7789", "direction": "output", "pull": "none", "speed_hz": 40000000, "notes": ""},
+    {"gpio": 19, "function": "SPI_MISO", "protocol_bus": "spi", "device": "ST7789", "direction": "input", "pull": "none", "speed_hz": 40000000, "notes": ""},
+    {"gpio": 18, "function": "SPI_SCLK", "protocol_bus": "spi", "device": "ST7789", "direction": "output", "pull": "none", "speed_hz": 40000000, "notes": ""},
+    {"gpio": 5, "function": "SPI_CS", "protocol_bus": "spi", "device": "ST7789", "direction": "output", "pull": "none", "speed_hz": 40000000, "notes": ""},
+    {"gpio": 16, "function": "OUTPUT", "protocol_bus": "gpio", "device": "ST7789", "direction": "output", "pull": "none", "speed_hz": 0, "notes": "DC pin"},
+    {"gpio": 4, "function": "OUTPUT", "protocol_bus": "gpio", "device": "ST7789", "direction": "output", "pull": "none", "speed_hz": 0, "notes": "RST pin"},
+    {"gpio": 2, "function": "OUTPUT", "protocol_bus": "gpio", "device": "ST7789", "direction": "output", "pull": "none", "speed_hz": 0, "notes": "Backlight"}
+  ]
+}
