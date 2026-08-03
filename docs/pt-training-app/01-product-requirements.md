@@ -9,7 +9,7 @@ treated as accepted here until overridden.
 ## 1. Vision
 
 A mobile app that gives people with common musculoskeletal pain (knees, hips,
-lower back, shoulders) safe, PT-authored exercise routines they can follow at
+lower back, shoulders) safe, evidence-based exercise routines they can follow at
 home — with a virtual trainer avatar teaching each movement, and the phone's
 front camera acting as a form coach: counting reps, running timers, and giving
 spoken form corrections in real time. A companion YouTube Shorts channel
@@ -54,8 +54,9 @@ treats, or claims to cure any condition. See PRD §9.
 
 ### 3.3 Routines & Plans
 
-- **FR-301** From the selected pain group(s), the app lists **PT-authored
-  routines** (from the content manifest) matching fitness level and equipment.
+- **FR-301** From the selected pain group(s), the app lists **evidence-based
+  routines** (from the content manifest, composed of KB-traceable exercises
+  per CR-5) matching fitness level and equipment.
 - **FR-302** User assembles a **weekly plan**: assign a routine (or rest) to
   each weekday. A starter plan is pre-filled from the manifest's recommended
   program for the pain group.
@@ -166,7 +167,12 @@ treats, or claims to cure any condition. See PRD §9.
 - **CR-4** Exercise-loop segment carries no narration audio.
 - **CR-5** Every exercise ships with: video, pose-rule config, cue script,
   metadata (name, pain groups, equipment, level, default sets/reps/tempo) —
-  reviewed and signed off by the credentialed PT before release.
+  and must trace to a production-eligible entry in the exercise knowledge
+  base (`knowledge-base/`): corroborated by ≥ 2 independent authoritative
+  sources (≥ 1 clinical/professional tier), with video script, form cues,
+  pose rules, and dosage derived from that entry's fields. No exercise ships
+  without a KB entry; when sources disagree, the more conservative clinical
+  guidance wins.
 - **CR-6** v1 library: 40 exercises, 12 routines, 4 pain-group starter
   programs.
 
@@ -204,7 +210,7 @@ treats, or claims to cure any condition. See PRD §9.
 
 ## 7. Release Criteria (v1 ship gate)
 
-1. All 40 exercises PT-signed-off (CR-5) and passing rep-accuracy validation.
+1. All 40 exercises KB-traceable per CR-5 and passing rep-accuracy validation.
 2. FR-101 screening + disclaimers legally reviewed.
 3. Offline session on airplane mode passes full regression.
 4. Free-tier load test: manifest + cold-download path at 1k simulated devices.

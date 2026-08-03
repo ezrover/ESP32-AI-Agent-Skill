@@ -45,13 +45,21 @@ with "consult a professional" message), fitness level, and available equipment
 free text invites diagnostic expectations we must not meet.
 
 ### Q1.4 Who builds the exercise programs — an algorithm or a human?
-🔴 **ASSUMED:** A licensed physical therapist (or equivalent credentialed
-professional) authors a static **program library**: for each pain group ×
-fitness level there is a curated set of routines. The app *selects and
-sequences* from this library; it does not generate novel exercise prescriptions
-algorithmically in v1. This is both a safety decision and a scope decision.
-**Open item: who is the credentialed content author?** This is the single
-biggest non-engineering dependency in the project.
+✅ **GIVEN (updated by product owner): no in-house clinical reviewer.** The
+content authority is an **evidence-based exercise knowledge base**
+(`knowledge-base/`) built by deep research of complete, authoritative public
+sources — clinical institutions (NHS, AAOS OrthoInfo, Mayo Clinic, Cleveland
+Clinic, …), professional organizations (APTA, ACSM, NASM, Physiopedia), and
+credentialed professionals' published videos — under a strict corroboration
+rule (every exercise in ≥ 2 independent sources, ≥ 1 clinical/professional
+tier; see `knowledge-base/README.md`). Routines and programs are composed
+from this KB; the app still *selects and sequences* from a static library and
+does not generate novel prescriptions algorithmically in v1.
+🔴 **Residual risk (recorded, accepted):** no clinician reviews our specific
+renditions (videos, cues, pose rules). Mitigations bound elsewhere: strict
+corroboration + conservative-source precedence, wellness disclaimers must
+never be diluted (PRD §9), and exercises whose safe execution depends on
+individualized assessment are excluded from starter routines.
 
 ### Q1.5 How many exercises at launch?
 🔶 **ASSUMED:** v1 launch target: **40 exercises** covering 4 pain groups
@@ -148,11 +156,11 @@ generated as still images first, which is where quality is controlled:
   **two competing image models** — Nano Banana Pro (Gemini image) and
   OpenAI's image model — from the same pose-reference prompt (built from the
   PT's exercise spec + the avatar/demonstrator character reference set).
-- **A/B selection:** PT (with the content producer) reviews both candidates
-  per keyframe and picks the anatomically correct winner; only approved
-  keyframes go into Flow. This moves anatomical review to *before* video
-  generation, where fixes are a cheap image re-prompt instead of a video
-  re-render.
+- **A/B selection:** the content producer scores both candidates per keyframe
+  against the knowledge base's form cues and common-mistakes checklist for
+  that exercise, and picks the winner; only approved keyframes go into Flow.
+  This moves form review to *before* video generation, where fixes are a
+  cheap image re-prompt instead of a video re-render.
 - Character consistency: both providers are seeded with the same character
   reference images so every exercise features the same demonstrator/avatar.
 
@@ -260,7 +268,7 @@ miscounting.
 ### Q5.3 What does the pose evaluator actually evaluate — and what does it *say*?
 🔴 **ASSUMED (safety-sensitive):** Per-exercise **form rules** (2–4 per
 exercise), each a joint-angle/alignment predicate with tolerance, authored
-alongside the PT (e.g. squat: "knees don't collapse inward" = knee x-distance
+from the knowledge base's form cues (e.g. squat: "knees don't collapse inward" = knee x-distance
 ≥ ankle x-distance × 0.9; "back stays neutral" = shoulder-hip-knee angle
 within range). Feedback is **coaching language, throttled** (max one cue per
 6 s, positive-first: "try keeping your knees over your toes"), never clinical
@@ -391,7 +399,7 @@ commercial use in Phase 0.
 
 | # | Item | Blocks |
 |---|------|--------|
-| 1 | Confirm the ASSUMED decisions above, especially Q1.4 (who is the credentialed PT content author?) | Phase 1 content |
+| 1 | Confirm the remaining ASSUMED decisions above (Q1.4 resolved: evidence-based knowledge base, no in-house reviewer) | Phase 1 content |
 | 2 | Flutter vs React Native — confirm team skill fit (Q6.1) | Phase 1 build |
 | 3 | Phase 0 pilot verdict: is Google Flow demonstration quality PT-approvable? (Q3.4) | Phase 1 content |
 | 4 | App name, branding, and the avatar's persona/voice | Store listing, video production |

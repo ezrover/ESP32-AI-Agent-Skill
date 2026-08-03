@@ -12,8 +12,8 @@ flowchart LR
     subgraph Production["Content Production (offline pipeline)"]
         FLOW[Google Flow / Veo\nvideo generation] --> EDIT[Edit & QC\nintro=10s, clean loop,\nlayout contract]
         EDIT --> MASTER[(Master MP4s)]
-        PT[Credentialed PT\nreview & sign-off] --> EDIT
-        PT --> RULES[Pose-rule configs\n+ cue scripts]
+        KB[Exercise knowledge base\n(researched authoritative sources)] --> EDIT
+        KB --> RULES[Pose-rule configs\n+ cue scripts]
     end
 
     MASTER --> YT[YouTube Shorts channel\n(marketing only)]
@@ -244,16 +244,22 @@ SQLite via drift. Tables: `profiles`, `plans` (weekday → routine ref),
 
 ## 5. Content Production Pipeline
 
+0. **Knowledge base entry** (`knowledge-base/<pain-group>.md`): the exercise
+   must be production-eligible — corroborated across authoritative sources
+   per the KB sourcing rules. The KB entry's fields (purpose, steps, form
+   cues, mistakes, dosage, trackability, cautions) are the inputs to every
+   step below (CR-5).
 1. **Script** per exercise: intro narration (benefits + how-to, written to fit
-   10 s), loop choreography, cue script, pose rules — drafted with, and
-   signed off by, the credentialed PT (CR-5).
-2. **Storyboard + keyframes (A/B):** from the PT's exercise spec, write the
-   Flow storyboard and generate the **start-pose and end-pose keyframe
-   images twice** — once with Nano Banana Pro, once with OpenAI's image
-   model — from the same prompt + shared character reference set. PT picks
-   the anatomically correct winner per keyframe (cheap image re-prompts until
-   approved). Log every A/B round (prompt, provider, winner, notes) in the
-   content repo to learn provider/prompt patterns per movement family.
+   10 s), loop choreography, cue script, pose rules — all derived from the KB
+   entry.
+2. **Storyboard + keyframes (A/B):** from the KB entry, write the Flow
+   storyboard and generate the **start-pose and end-pose keyframe images
+   twice** — once with Nano Banana Pro, once with OpenAI's image model — from
+   the same prompt + shared character reference set. The content producer
+   scores both against the KB's form-cue/common-mistake checklist and picks
+   the winner (cheap image re-prompts until it passes). Log every A/B round
+   (prompt, provider, winner, notes) in the content repo to learn
+   provider/prompt patterns per movement family.
 3. **Generate** with Google Flow (frames-to-video) from the approved
    keyframes: avatar clip (circular-frame region) + demonstration clip per
    the layout contract (CR-2). *Phase 0 still validates Flow's in-between

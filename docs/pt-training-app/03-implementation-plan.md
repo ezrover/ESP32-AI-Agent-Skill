@@ -13,24 +13,30 @@ proportionally.
 ## Phase 0 — De-risk (2–3 weeks) — *nothing else starts until this passes*
 
 The two existential risks are (1) Google Flow's ability to produce
-PT-approvable demonstration video under the layout contract, and (2) pose
+form-accurate demonstration video under the layout contract, and (2) pose
 tracking quality in real living rooms. Phase 0 attacks only those.
 
 **Workstream A — Content pilot**
+0. **Knowledge base is a Phase 0 input** (already extracted to
+   `knowledge-base/`): confirm the pilot exercises' entries are
+   production-eligible (corroboration rule) and their form-cue checklists are
+   specific enough to score keyframes against.
 1. Define avatar persona + voice; build the shared **character reference set**
    (avatar + demonstrator) used by all image/video generation.
 2. Stand up the **storyboard/keyframe A/B workflow** (grill Q3.4): per
    exercise, generate start/end pose keyframes with both Nano Banana Pro and
-   OpenAI's image model from the same prompt; PT picks winners; log each A/B
-   round (prompt, provider, winner, notes) in the content repo.
+   OpenAI's image model from the same prompt; score against the KB form-cue
+   checklist to pick winners; log each A/B round (prompt, provider, winner,
+   notes) in the content repo.
 3. Produce **3 pilot exercises** end-to-end (script → storyboard/keyframe A/B
    → Flow frames-to-video → assembly → QC → R2 + YouTube unlisted): one
    rep-based (squat variant), one time-based (wall sit), one
    `pose_tracking: off` (floor stretch).
-4. PT reviews the *generated motion* (keyframes are pre-approved by
-   construction — the open question is Flow's in-between interpolation);
-   verify Flow, Nano Banana Pro, and OpenAI image output licenses permit
-   commercial use (grill Q8.3).
+4. Review the *generated motion* frame-by-frame against the KB entry's form
+   cues and common mistakes (keyframes are pre-approved by construction — the
+   open question is Flow's in-between interpolation); verify Flow, Nano
+   Banana Pro, and OpenAI image output licenses permit commercial use (grill
+   Q8.3).
 
 **Workstream B — Tech spike (throwaway code allowed)**
 1. Flutter spike: camera → MediaPipe Pose Landmarker at ≥ 20 fps on Pixel 6a
@@ -43,8 +49,8 @@ tracking quality in real living rooms. Phase 0 attacks only those.
 4. Confirm Flutter vs React Native decision (grill Q6.1) based on spike pain.
 
 **Exit criteria (go/no-go):**
-- PT signs off pilot videos **or** fallback (filmed demo + Flow avatar intro)
-  is adopted and one fallback pilot passes review.
+- Pilot videos pass the KB form-cue review **or** fallback (filmed demo +
+  Flow avatar intro) is adopted and one fallback pilot passes the same review.
 - ≥ 20 fps sustained pose tracking on both reference devices; ≥ 90% rep
   accuracy on the pilot exercise.
 - Framework decision recorded as ADR.
@@ -69,7 +75,9 @@ tracking quality in real living rooms. Phase 0 attacks only those.
 - Production template + automated QC script (architecture §5 step 4) hardened
   from pilots; keyframe A/B log tooling promoted from pilot scripts.
 - Produce first pain group's exercises (knee: 10 exercises + 3 routines +
-  starter program), including pose-rule configs and cue scripts with PT.
+  starter program), with pose-rule configs, cue scripts, and dosage derived
+  from the knowledge base entries (CR-5). Exercise selection: highest-
+  corroboration KB entries that are camera-trackable or explicitly timer-mode.
 - Record cue audio library (FR-601) with the avatar voice.
 
 **Exit criteria:** app installs, creates profiles, syncs manifest, downloads
@@ -98,7 +106,8 @@ all tracked knee exercises; 20-min thermal soak passes.
 ## Phase 3 — Content Scale-out & Launch Hardening (4–6 weeks)
 
 - Produce remaining pain groups (hip, lower back, shoulder): 30 exercises,
-  9 routines, starter programs; PT sign-off each (CR-5, CR-6).
+  9 routines, starter programs; each KB-traceable and passing the KB form-cue
+  review (CR-5, CR-6).
 - Publish all 40 Shorts to the channel with SEO templates + UTM links
   (FR-801); channel art, about page with disclaimer copy.
 - Legal review: disclaimers, red-flag copy, privacy policy, store listings
@@ -118,7 +127,7 @@ all tracked knee exercises; 20-min thermal soak passes.
    Workers paid tier likely).
 2. More pain groups (neck, ankle/foot, wrist/elbow) — pure content-pipeline
    work, no app release needed (§2).
-3. Adaptive progression (PT-authored progression ladders, still no
+3. Adaptive progression (KB-derived progression ladders, still no
    algorithmic prescription).
 4. Apple Health / Google Fit session export (opt-in).
 5. Localization; tablet-optimized side-by-side session layout.
@@ -130,14 +139,15 @@ all tracked knee exercises; 20-min thermal soak passes.
 | Risk | Likelihood | Impact | Mitigation |
 |---|---|---|---|
 | Flow's in-between motion interpolates joints badly despite approved keyframes | Med | High | Storyboard/keyframe A/B workflow controls poses pre-render; Phase 0 gate validates motion; filmed-demo fallback keeps everything else intact |
-| No credentialed PT secured | Med | High (blocks all content) | Contract before Phase 1; content budget line item |
+| No clinician reviews our specific renditions (KB-only content authority) | Accepted | Med-High (liability/quality) | Strict ≥2-source corroboration, conservative-source precedence, undiluted disclaimers, individualized-assessment exercises excluded from starters; optional later: one-time external review of shipped set |
 | Rep accuracy < 90% on some exercises in real homes (lighting, clothing, camera angle) | Med | Med | Framing assistant, confidence gating, manual +1 fallback, demote to timer mode per exercise |
 | iOS MediaPipe/Flutter integration friction | Med | Med | Phase 0 spike; MoveNet/TFLite fallback (A3 alt) |
 | Free-tier cliffs at unexpected growth | Low | Low-Med | Quota alarms; $5 Workers paid tier is the pressure valve; architecture already minimizes requests |
 
 ## Dependency Summary (external)
 
-- Credentialed PT (content author/reviewer) — needed from Phase 0.
+- Exercise knowledge base (`knowledge-base/`) kept current — extraction
+  re-verified before each content release.
 - Google Flow + Nano Banana Pro + OpenAI image model access, with
   commercial-use license confirmation for all three — Phase 0.
 - Apple/Google developer accounts — Phase 1.

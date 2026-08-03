@@ -2,7 +2,7 @@
 
 A physical-therapy-inspired wellness training app (iOS/Android) with a
 companion YouTube Shorts channel. Users pick discomfort areas (knee, hip,
-lower back, shoulder), get PT-authored routines with avatar-narrated exercise
+lower back, shoulder), get evidence-based routines with avatar-narrated exercise
 videos, and the phone's front camera counts reps and coaches form on-device.
 Infrastructure runs on Cloudflare's free tier; videos are produced with
 Google Flow and dual-hosted on YouTube (marketing) and Cloudflare R2 (app
@@ -16,6 +16,7 @@ delivery + legal local caching).
 | [01-product-requirements.md](01-product-requirements.md) | PRD: personas, functional requirements (FR-xxx), content requirements (CR-x), NFRs, success metrics, release criteria, legal positioning |
 | [02-architecture.md](02-architecture.md) | Architecture: system diagram, content-manifest contract, Cloudflare deployment, Flutter app design (session engine, pose pipeline, playback, audio), production pipeline, ADRs |
 | [03-implementation-plan.md](03-implementation-plan.md) | Phased plan: Phase 0 de-risk gate → foundations → session engine → launch; risk register; external dependencies |
+| [knowledge-base/](knowledge-base/README.md) | The content authority: exercises per pain group extracted by deep research from authoritative sources (clinical institutions, professional orgs, credentialed professionals), with sourcing/corroboration rules |
 
 ## Read this first
 
