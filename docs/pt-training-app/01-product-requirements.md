@@ -132,10 +132,19 @@ treats, or claims to cure any condition. See PRD §9.
   by checksum from the manifest.
 - **FR-703** Prefetch: after a plan is created/edited, videos for its routines
   download in the background (Wi-Fi by default; cellular opt-in).
-- **FR-704** Device cache: LRU, default cap 1 GB, user-adjustable; "manage
-  downloads" screen. A fully cached routine is fully usable offline.
+- **FR-704** Cached videos are **permanent — no time-based expiration**. A
+  video is re-downloaded only when change detection (FR-706) shows it changed.
+  Videos referenced by the profile's current plans are pinned; only videos
+  from removed routines are eligible for LRU eviction under the disk-space cap
+  (default 1 GB, user-adjustable; "manage downloads" screen). A fully cached
+  routine is fully usable offline.
 - **FR-705** If a needed video is not cached at session start, show a blocking
   "preparing your workout" download step — sessions never stream.
+- **FR-706 Change detection:** performed via the manifest only — one
+  conditional `GET /manifest` (`If-None-Match`) per launch when online; `304`
+  means no further requests. When the manifest changes, videos whose hash
+  differs from the cached copy are re-downloaded in the background and stale
+  files deleted. The app never polls individual video URLs for freshness.
 
 ### 3.8 YouTube Channel (companion, not a runtime dependency)
 

@@ -127,9 +127,25 @@ it cannot inject code. Adding a genuinely new signal type requires an app
 release — accepted trade-off for safety and app-store compliance.
 
 Manifest updates are atomic on-device: download full manifest → validate schema
-+ referential integrity (every routine's exercise exists) → swap. Videos are
-content-addressed by hash so an updated video is a new URL; old cached files
-are LRU-evicted.
++ referential integrity (every routine's exercise exists) → swap.
+
+### 2.1 Change detection & permanent caching (FR-704/FR-706)
+
+Videos are **content-addressed**: the R2 object key embeds the file's SHA-256
+(e.g. `v/knee_wall_sit_v1-3fa9c2….mp4`), so any URL is immutable and served
+with `Cache-Control: immutable, max-age=31536000`. Consequences:
+
+- **On-device cache is permanent** — a cached file can never silently go
+  stale, because a changed video is a *different URL*. No TTLs, no expiry
+  timers, no per-video revalidation requests.
+- **All change detection collapses into one request:** conditional
+  `GET /manifest` with `If-None-Match` on launch. `304` → the entire content
+  set is unchanged, zero further traffic. Manifest changed → diff cached
+  hashes vs. manifest hashes; re-download only changed/new videos in the
+  background; delete superseded files. This is the minimum possible
+  request count on the Workers free tier (1 request/device/day of use).
+- Pinning: videos referenced by any profile's current plan are exempt from
+  eviction; the LRU cap only reclaims space from videos no longer referenced.
 
 ## 3. Cloudflare Deployment
 

@@ -186,11 +186,26 @@ videos. The manifest is the single integration contract between the content
 pipeline and the app.
 
 ### Q4.3 Cache policy on device?
-🔶 **ASSUMED:** LRU cache, default cap 1 GB (user-adjustable), videos for the
-user's *active routines* are prefetched on Wi-Fi after routine creation; a
-session never streams — if a video isn't cached yet, the session screen shows
-a short "preparing your workout" download step. Offline: fully cached routines
-work with no connectivity (aligns with local profiles, Q2.1).
+✅ **GIVEN (updated by product owner):** Cached videos are **permanent — no
+time-based expiration**. A video is re-downloaded only when it has actually
+changed on the server (**change detection**), keeping recurring bandwidth and
+request costs at effectively zero.
+🔶 **ASSUMED — mechanism:** change detection happens at the **manifest**
+level, not per-video. Videos in R2 are content-addressed (filename contains
+the SHA-256 of the file), so a video file at a given URL is immutable. On
+launch (when online) the app makes exactly **one** conditional request —
+`GET /manifest` with `If-None-Match` — and a `304 Not Modified` means nothing
+anywhere has changed: zero further requests. If the manifest did change, any
+exercise whose video hash differs from the cached copy gets its new file
+downloaded in the background and the old file deleted. Per-video HEAD/expiry
+polling is explicitly rejected — it would multiply request counts ~40× for no
+benefit. Videos for the user's *active routines* are prefetched on Wi-Fi
+(cellular opt-in); a session never streams — if a video isn't cached yet, the
+session screen shows a "preparing your workout" download step. Fully cached
+routines work with no connectivity (aligns with local profiles, Q2.1). An LRU
+cap (default 1 GB, user-adjustable) still exists purely as a disk-space
+guard for videos from *removed* routines — videos referenced by the current
+plan are pinned and never evicted.
 
 ### Q4.4 What does Cloudflare's free tier actually cover, and where are the cliffs?
 🔶 Validated against free-tier limits (as of early 2026 — re-verify at build
