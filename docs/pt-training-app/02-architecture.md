@@ -247,16 +247,24 @@ SQLite via drift. Tables: `profiles`, `plans` (weekday → routine ref),
 1. **Script** per exercise: intro narration (benefits + how-to, written to fit
    10 s), loop choreography, cue script, pose rules — drafted with, and
    signed off by, the credentialed PT (CR-5).
-2. **Generate** with Google Flow: avatar clip (circular-frame region) +
-   demonstration clip per the layout contract (CR-2). *Phase 0 validates Flow
-   can do this; fallback is filmed human demo + Flow avatar for the intro
-   circle only.*
-3. **Assemble** (template project or ffmpeg script): enforce 1080×1920@30,
+2. **Storyboard + keyframes (A/B):** from the PT's exercise spec, write the
+   Flow storyboard and generate the **start-pose and end-pose keyframe
+   images twice** — once with Nano Banana Pro, once with OpenAI's image
+   model — from the same prompt + shared character reference set. PT picks
+   the anatomically correct winner per keyframe (cheap image re-prompts until
+   approved). Log every A/B round (prompt, provider, winner, notes) in the
+   content repo to learn provider/prompt patterns per movement family.
+3. **Generate** with Google Flow (frames-to-video) from the approved
+   keyframes: avatar clip (circular-frame region) + demonstration clip per
+   the layout contract (CR-2). *Phase 0 still validates Flow's in-between
+   motion quality; fallback remains filmed human demo + Flow avatar for the
+   intro circle only.*
+4. **Assemble** (template project or ffmpeg script): enforce 1080×1920@30,
    intro exactly 10.0 s, loop trimmed to clean seam, loudness-normalized
    intro narration, silent loop segment (CR-4). Automated QC script checks
    duration, resolution, audio presence per segment, and that the avatar
    region + bottom band are respected (frame-difference heuristics).
-4. **Publish:** upload master to R2 (content-addressed name), add manifest
+5. **Publish:** upload master to R2 (content-addressed name), add manifest
    entry with measured `intro_end_ms`/loop bounds + rule config; CI validates
    schema and referential integrity; bump `content_version`. Upload same
    master to YouTube as a Short with templated title/description/UTM link.

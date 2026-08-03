@@ -139,14 +139,31 @@ never fight the video audio. The app ducks/plays its cues over the muted or
 quiet loop.
 
 ### Q3.4 Can Google Flow actually deliver a *consistent* avatar and *anatomically correct* movement demonstrations?
-🔴 **RISK — must be validated in Phase 0.** Generative video (Veo/Flow) is
-known to struggle with (a) character consistency across dozens of clips and
-(b) precise joint mechanics — exactly what a form-teaching video needs.
-Mitigation plan: Phase 0 produces 3 pilot exercises end-to-end; a credentialed
-PT reviews them for anatomical correctness; if Flow's demonstration quality
-fails review, fallback is **filmed human demonstrations** with a Flow-generated
-avatar only in the intro circle. The architecture is agnostic to this — only
-the production pipeline changes.
+✅ **GIVEN (updated by product owner): yes — via storyboard-driven
+generation.** Google Flow's workflow takes a per-exercise **storyboard with
+starting and ending keyframe images** (frames-to-video). The keyframes are
+generated as still images first, which is where quality is controlled:
+
+- For each exercise, generate the start-pose and end-pose keyframes with
+  **two competing image models** — Nano Banana Pro (Gemini image) and
+  OpenAI's image model — from the same pose-reference prompt (built from the
+  PT's exercise spec + the avatar/demonstrator character reference set).
+- **A/B selection:** PT (with the content producer) reviews both candidates
+  per keyframe and picks the anatomically correct winner; only approved
+  keyframes go into Flow. This moves anatomical review to *before* video
+  generation, where fixes are a cheap image re-prompt instead of a video
+  re-render.
+- Character consistency: both providers are seeded with the same character
+  reference images so every exercise features the same demonstrator/avatar.
+
+🔶 **ASSUMED:** the keyframe A/B selection is logged (prompt, provider,
+winner, PT notes) in the content repo so the pipeline learns which provider/
+prompt patterns win per movement family. 🔴 **Residual risk:** Flow's
+*in-between motion* (between correct keyframes) can still interpolate joints
+badly — Phase 0's 3-exercise pilot still stands to validate motion quality,
+with filmed human demonstration as the retained fallback. The two extra image
+providers add ~pennies per exercise; both licenses must permit commercial use
+(same check as Q8.3).
 
 ### Q3.5 What are YouTube Shorts' constraints?
 Shorts must be ≤ 3 min (fine), portrait (fine). But Shorts **cannot be

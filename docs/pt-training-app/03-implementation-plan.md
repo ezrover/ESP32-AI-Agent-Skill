@@ -17,11 +17,19 @@ PT-approvable demonstration video under the layout contract, and (2) pose
 tracking quality in real living rooms. Phase 0 attacks only those.
 
 **Workstream A — Content pilot**
-1. Define avatar persona + voice; generate the avatar reference set in Flow.
-2. Produce **3 pilot exercises** end-to-end (script → Flow → assembly → QC →
-   R2 + YouTube unlisted): one rep-based (squat variant), one time-based
-   (wall sit), one `pose_tracking: off` (floor stretch).
-3. PT reviews for anatomical correctness; verify Flow output license permits
+1. Define avatar persona + voice; build the shared **character reference set**
+   (avatar + demonstrator) used by all image/video generation.
+2. Stand up the **storyboard/keyframe A/B workflow** (grill Q3.4): per
+   exercise, generate start/end pose keyframes with both Nano Banana Pro and
+   OpenAI's image model from the same prompt; PT picks winners; log each A/B
+   round (prompt, provider, winner, notes) in the content repo.
+3. Produce **3 pilot exercises** end-to-end (script → storyboard/keyframe A/B
+   → Flow frames-to-video → assembly → QC → R2 + YouTube unlisted): one
+   rep-based (squat variant), one time-based (wall sit), one
+   `pose_tracking: off` (floor stretch).
+4. PT reviews the *generated motion* (keyframes are pre-approved by
+   construction — the open question is Flow's in-between interpolation);
+   verify Flow, Nano Banana Pro, and OpenAI image output licenses permit
    commercial use (grill Q8.3).
 
 **Workstream B — Tech spike (throwaway code allowed)**
@@ -58,7 +66,8 @@ tracking quality in real living rooms. Phase 0 attacks only those.
 - Content publish pipeline: manifest schema validator + R2 uploader in CI.
 
 **Track: Content production ramp**
-- Production template + automated QC script (§5.3) hardened from pilots.
+- Production template + automated QC script (architecture §5 step 4) hardened
+  from pilots; keyframe A/B log tooling promoted from pilot scripts.
 - Produce first pain group's exercises (knee: 10 exercises + 3 routines +
   starter program), including pose-rule configs and cue scripts with PT.
 - Record cue audio library (FR-601) with the avatar voice.
@@ -120,7 +129,7 @@ all tracked knee exercises; 20-min thermal soak passes.
 
 | Risk | Likelihood | Impact | Mitigation |
 |---|---|---|---|
-| Flow can't produce PT-approvable demos | Med-High | High | Phase 0 gate; filmed-demo fallback keeps everything else intact |
+| Flow's in-between motion interpolates joints badly despite approved keyframes | Med | High | Storyboard/keyframe A/B workflow controls poses pre-render; Phase 0 gate validates motion; filmed-demo fallback keeps everything else intact |
 | No credentialed PT secured | Med | High (blocks all content) | Contract before Phase 1; content budget line item |
 | Rep accuracy < 90% on some exercises in real homes (lighting, clothing, camera angle) | Med | Med | Framing assistant, confidence gating, manual +1 fallback, demote to timer mode per exercise |
 | iOS MediaPipe/Flutter integration friction | Med | Med | Phase 0 spike; MoveNet/TFLite fallback (A3 alt) |
@@ -129,7 +138,8 @@ all tracked knee exercises; 20-min thermal soak passes.
 ## Dependency Summary (external)
 
 - Credentialed PT (content author/reviewer) — needed from Phase 0.
-- Google Flow access + commercial-use license confirmation — Phase 0.
+- Google Flow + Nano Banana Pro + OpenAI image model access, with
+  commercial-use license confirmation for all three — Phase 0.
 - Apple/Google developer accounts — Phase 1.
 - Legal reviewer (wellness positioning + privacy) — Phase 3, engaged earlier
   for copy guidelines.
