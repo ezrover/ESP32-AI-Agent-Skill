@@ -8,8 +8,22 @@ Q1.4).
 
 ## Files
 
-One file per pain group: `knee.md`, `hip.md`, `lower-back.md`, `shoulder.md`.
-Extraction date and counts are stamped at the top of each file.
+One file per pain group. Extraction date and counts are stamped at the top of
+each file.
+
+| File | Corroborated | Candidates | Camera-trackable (reps/hold) |
+|---|---|---|---|
+| [knee.md](knee.md) | 26 | 3 | 9 / 5 |
+| [hip.md](hip.md) | 25 | 9 | 7 / 4 |
+| [lower-back.md](lower-back.md) | 26 | 4 | 7 (mostly floor work — largely timer-mode) |
+| [shoulder.md](shoulder.md) | 34 | 5 | 13 / 5 |
+| **Total** | **111** | **21** | |
+
+Extraction 2026-08-03. Note recorded in each file: this environment's egress
+proxy blocked direct page fetches to several clinical hosts, so extraction
+relied on source-scoped search-result content for those pages; cited URLs
+were verified via search listings. Before production use of any single
+entry, re-verify its cited pages directly (see Maintenance below).
 
 ## Sourcing rules (binding)
 
